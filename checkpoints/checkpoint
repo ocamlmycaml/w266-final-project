@@ -1,0 +1,2 @@
+model_checkpoint_path: "attentive_doc_model"
+all_model_checkpoint_paths: "attentive_doc_model"
