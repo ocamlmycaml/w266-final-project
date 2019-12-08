@@ -2,6 +2,7 @@ tensorflow_datasets
 nltk
 matplotlib
 bokeh
+seaborn
 keract
 scikit-learn
 pandas

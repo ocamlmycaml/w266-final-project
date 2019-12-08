@@ -157,7 +157,7 @@ class AttentiveDocModel(tf.keras.Model):
         
         self.dropout.build((BATCH_SIZE, hidden_units))
     
-    def call(self, inputs, training=False):
+    def call(self, inputs, training=False, return_attention_weights=False):
         (inputs, sent_mask, para_mask, doc_mask) = inputs
         
         embedded = self.embedding(inputs)
@@ -180,12 +180,10 @@ class AttentiveDocModel(tf.keras.Model):
         x = self.hidden(x)
         x = self.dropout(x)
         
-        if not training:
-            self.sent_weights = sent_weights
-            self.para_weights = para_weights
-            self.doc_weights = doc_weights
-        
-        return self.classifier(x)
+        if not return_attention_weights:
+            return self.classifier(x)
+        else:
+            return self.classifier(x), sent_weights, para_weights, doc_weights
     
     
 class SmallDocModel(tf.keras.Model):
